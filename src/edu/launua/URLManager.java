@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class URLManager{
+public class URLManager {
     private String spec;
     private URL url;
     public URLManager() { }
@@ -32,26 +32,33 @@ public class URLManager{
             inputStream.read(buffer);
             res = new String(buffer, "cp1251");
         }
-        catch (IOException io){
+        catch (IOException io) {
             io.getMessage();
         }
         return  res;
     }
 
-    public Object[] getPageTagsSortedSet(){
+    public Object[] getPageTags() {
         String res = getPageContent();
         Pattern pattern = Pattern.compile("<[\\w]+");
         Matcher matcher = pattern.matcher(res);
-        Set<String> tags = new TreeSet<String>();
-        while(matcher.find()){
+        ArrayList<Object> tags = new ArrayList<>();
+        while(matcher.find())
             tags.add(res.substring(matcher.start(), matcher.end()) + ">");
-            res = matcher.replaceFirst("");
-            matcher = pattern.matcher(res);
-        }
         return tags.toArray();
     }
 
-    public Object[] getPageTagsSortedByCountSet(){
+    public Object[] getPageTagsSortedSet() {
+        String res = getPageContent();
+        Pattern pattern = Pattern.compile("<[\\w]+");
+        Matcher matcher = pattern.matcher(res);
+        Set<String> tags = new TreeSet<>();
+        while(matcher.find())
+            tags.add(res.substring(matcher.start(), matcher.end()) + ">");
+        return tags.toArray();
+    }
+
+    public Object[] getPageTagsSortedByCountSetOld() {
         String res = getPageContent();
         Pattern pattern = Pattern.compile("<[\\w]+");
         Matcher matcher = pattern.matcher(res);
@@ -76,13 +83,27 @@ public class URLManager{
         return list.toArray();
     }
 
-
+    // More clean version
+    public Object[] getPageTagsSortedByCountSet() {
+        Object[] tags = getPageTags();
+        Map<Object, Integer> tagsCount= new HashMap<>();
+        for (Object tag : tags) {
+            if(tagsCount.containsKey(tag))
+                tagsCount.put(tag, tagsCount.get(tag) + 1);
+            else
+                tagsCount.put(tag, 1);
+        }
+        List<Map.Entry<Object, Integer>> list = new ArrayList<>(tagsCount.entrySet());
+        // list.sort((a, b) -> a.getValue() - b.getValue());
+        list.sort(Comparator.comparing(Map.Entry<Object, Integer>::getValue));
+        return list.toArray();
+    }
 
     private void createUrl(String spec) {
         try {
             url = new URL(spec);
         }
-        catch (MalformedURLException me){
+        catch (MalformedURLException me) {
             System.out.println(me.getMessage());
         }
     }

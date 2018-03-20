@@ -26,12 +26,12 @@ public class Collector {
     }
 
     public ArrayList<String> readFileOld() {
-        ArrayList<String> res = new ArrayList<String>();
+        ArrayList<String> res = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader (
                 new InputStreamReader(
                         new FileInputStream(pathIn), Charset.forName("cp1251")))){
             String line;
-            while((line = bufferedReader.readLine()) != null){
+            while((line = bufferedReader.readLine()) != null) {
                 res.add(line);
             }
         }
@@ -42,23 +42,18 @@ public class Collector {
     }
 
     public ArrayList<String> readFileNew() {
-        ArrayList<String> res = new ArrayList<String>();
+        ArrayList<String> res = new ArrayList<>();
         try {
             res = (ArrayList<String>) Files.readAllLines(Paths.get(pathIn), Charset.forName("cp1251"));
         }
-        catch (IOException io){
+        catch (IOException io) {
             System.out.println(io.getMessage() + "?!");
         }
         return res;
     }
 
-    public ArrayList<String> getSortedList(ArrayList<String> strings ) {
-        Collections.sort(strings, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.length() - o2.length();
-            }
-        });
+    public ArrayList<String> getSortedList(ArrayList<String> strings) {
+        strings.sort(Comparator.comparing(String::length));
         return strings;
     }
 
@@ -66,12 +61,10 @@ public class Collector {
         try(BufferedWriter bufferedWriter =
                     new BufferedWriter(
                             new OutputStreamWriter(
-                                    new FileOutputStream(pathOut), Charset.forName("cp1251")))){
-            for (String string:
-                 strings) {
+                                    new FileOutputStream(pathOut), Charset.forName("cp1251")))) {
+            for (String string : strings) {
                 bufferedWriter.write(string);
             }
-
         }
         catch (IOException ioe) {
             System.out.println(ioe.getMessage());

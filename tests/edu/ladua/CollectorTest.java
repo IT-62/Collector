@@ -30,16 +30,14 @@ public class CollectorTest {
 
     @Test
     public void testReadFileOld() {
-        for (String string:
-             collector.readFileNew()) {
+        for (String string : collector.readFileNew()) {
             System.out.println(string);
         }
     }
 
     @Test
     public void testGetSortedList(){
-        for (String string:
-             collector.getSortedList(collector.readFileOld())) {
+        for (String string : collector.getSortedList(collector.readFileOld())) {
             System.out.println(string);
         }
     }
