@@ -25,9 +25,9 @@ public class Collector {
         return pathOut;
     }
 
-    public ArrayList<String> readFileOld(){
+    public ArrayList<String> readFileOld() {
         ArrayList<String> res = new ArrayList<String>();
-        try(BufferedReader bufferedReader = new BufferedReader(
+        try(BufferedReader bufferedReader = new BufferedReader (
                 new InputStreamReader(
                         new FileInputStream(pathIn), Charset.forName("cp1251")))){
             String line;
@@ -35,13 +35,13 @@ public class Collector {
                 res.add(line);
             }
         }
-        catch (IOException ioe){
+        catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
         return res;
     }
 
-    public ArrayList<String> readFileNew(){
+    public ArrayList<String> readFileNew() {
         ArrayList<String> res = new ArrayList<String>();
         try {
             res = (ArrayList<String>) Files.readAllLines(Paths.get(pathIn), Charset.forName("cp1251"));
@@ -52,7 +52,7 @@ public class Collector {
         return res;
     }
 
-    public ArrayList<String> getSortedList(ArrayList<String> strings){
+    public ArrayList<String> getSortedList(ArrayList<String> strings ) {
         Collections.sort(strings, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
@@ -62,7 +62,7 @@ public class Collector {
         return strings;
     }
 
-    public void writeToFile(ArrayList<String> strings){
+    public void writeToFile(ArrayList<String> strings) {
         try(BufferedWriter bufferedWriter =
                     new BufferedWriter(
                             new OutputStreamWriter(
@@ -73,7 +73,7 @@ public class Collector {
             }
 
         }
-        catch (IOException ioe){
+        catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
     }

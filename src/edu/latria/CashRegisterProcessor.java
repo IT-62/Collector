@@ -32,15 +32,17 @@ public class CashRegisterProcessor {
         }
     }
 
-    public void addToCheck(String name, int count){
-        goods.put(name, count);
+    public void addToCheck(String name, int count) {
+        if(goods.containsKey(name)) goods.put(name, count + goods.get(name));
+        else
+            goods.put(name, count);
     }
 
     public Map<String, Integer> getGoods() {
         return goods;
     }
 
-    public BigDecimal getPrice(String name){
+    public BigDecimal getPrice(String name) {
         return prices.get(name);
     }
 
