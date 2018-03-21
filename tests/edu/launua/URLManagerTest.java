@@ -64,13 +64,13 @@ public class URLManagerTest {
 
     @Test
     public void testGetPageTags() {
-        assertEquals(new Object[]{"<html>", "<body>", "<table>", "<tr>", "<td>", "<td>", "<tr>", "<td>"}, urlManager.getPageTags());
+        assertArrayEquals(new Object[]{"<html>", "<body>", "<table>", "<tr>", "<td>", "<td>", "<tr>", "<td>"}, urlManager.getPageTags());
         assertNotEquals(new Object[]{"<html>", "<body>", "<table>", "<tr>", "<td>", "<tr>", "<td>"}, urlManager.getPageTags());
     }
 
     @Test
     public void getPageTagsSortedSet() {
-        assertEquals(new Object[]{"<body>", "<html>", "<table>", "<td>", "<tr>"}, urlManager.getPageTagsSortedSet());
+        assertArrayEquals(new Object[]{"<body>", "<html>", "<table>", "<td>", "<tr>"}, urlManager.getPageTagsSortedSet());
         assertNotEquals(new Object[]{"<html>", "<body>", "<table>", "<tr>", "<td>", "<tr>", "<td>"}, urlManager.getPageTagsSortedSet());
     }
     //"nice" code
@@ -98,7 +98,7 @@ public class URLManagerTest {
         map.put("<td>", 3);
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         list.sort(Comparator.comparing(Map.Entry<String, Integer>::getValue));
-        assertEquals(list.toArray(), urlManager.getPageTagsSortedByCountSet());
-        assertNotEquals(new Object[]{"<table>=1", "<html>=2", "<body>=1", "<tr>=2", "<td>=3"}, urlManager.getPageTagsSortedByCountSet());
+        assertArrayEquals(list.toArray(), urlManager.getPageTagsSortedByCountSet());
+        assertNotEquals(new String[]{"<table>=1", "<html>=2", "<body>=1", "<tr>=2", "<td>=3"}, urlManager.getPageTagsSortedByCountSet());
     }
 }

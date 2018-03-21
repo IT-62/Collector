@@ -44,11 +44,10 @@ public class CashRegisterProcessor {
         return prices.get(name);
     }
 
-    public String getCheck(){
+    public String getCheck() {
         String res = "";
-        for (String key:
-             goods.keySet()) {
-            res += key + " " + goods.get(key) + "\n";
+        for (String key : goods.keySet()) {
+            res += key + " " + goods.get(key) + " " + getPrice(key) + "\n";
         }
         return res;
     }

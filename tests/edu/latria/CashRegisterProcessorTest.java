@@ -44,10 +44,11 @@ public class CashRegisterProcessorTest {
         assertEquals(new BigDecimal(2.5), cashRegisterProcessor.getPrice("meat"));
         assertNotEquals(new BigDecimal(3.5), cashRegisterProcessor.getPrice("meat"));
     }
+
     @Test
-    public void testGetCheck(){
-        assertEquals("bread 4\n" +
-                "fish 4\n" +
-                "meat 5\n", cashRegisterProcessor.getCheck());
+    public void testGetCheck() {
+        assertEquals("bread 4 5.5\n" +
+                "fish 4 1.5\n" +
+                "meat 5 2.5\n", cashRegisterProcessor.getCheck());
     }
 }

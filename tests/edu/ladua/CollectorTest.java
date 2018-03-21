@@ -9,14 +9,14 @@ import static org.junit.Assert.*;
 public class CollectorTest {
     Collector collector;
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         collector = new Collector("src/res/ladua/input.txt",
                 "src/res/ladua/output.txt");
 
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         collector = null;
     }
 
@@ -30,11 +30,11 @@ public class CollectorTest {
 
     @Test
     public void testReadFileOld() {
-        assertEquals(new String[]{"Hello","world","asd"}, collector.readFileOld().toArray());
+        assertArrayEquals(new String[]{"Hello","world","asd"}, collector.readFileOld().toArray());
     }
 
     @Test
-    public void testGetSortedList(){
-        assertEquals(new String[]{"Hello","world","asd"}, collector.readFileNew().toArray());
+    public void testGetSortedList() {
+        assertArrayEquals(new String[]{"Hello","world","asd"}, collector.readFileNew().toArray());
     }
 }
