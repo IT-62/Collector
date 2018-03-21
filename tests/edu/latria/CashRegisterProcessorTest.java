@@ -35,14 +35,19 @@ public class CashRegisterProcessorTest {
 
     @Test
     public void testGetGoods() {
-        for (Map.Entry<String,Integer> entry:
-             cashRegisterProcessor.getGoods().entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue() + " " + entry.getValue()*
-                    cashRegisterProcessor.getPrice(entry.getKey()).doubleValue());
-        }
+        assertEquals("{bread=4, fish=4, meat=5}", cashRegisterProcessor.getGoods().toString());
     }
 
     @Test
     public void testGetPrice() {
+        assertEquals(new BigDecimal(1.5), cashRegisterProcessor.getPrice("fish"));
+        assertEquals(new BigDecimal(2.5), cashRegisterProcessor.getPrice("meat"));
+        assertNotEquals(new BigDecimal(3.5), cashRegisterProcessor.getPrice("meat"));
+    }
+    @Test
+    public void testGetCheck(){
+        assertEquals("bread 4\n" +
+                "fish 4\n" +
+                "meat 5\n", cashRegisterProcessor.getCheck());
     }
 }

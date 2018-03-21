@@ -30,15 +30,11 @@ public class CollectorTest {
 
     @Test
     public void testReadFileOld() {
-        for (String string : collector.readFileNew()) {
-            System.out.println(string);
-        }
+        assertEquals(new String[]{"Hello","world","asd"}, collector.readFileOld().toArray());
     }
 
     @Test
     public void testGetSortedList(){
-        for (String string : collector.getSortedList(collector.readFileOld())) {
-            System.out.println(string);
-        }
+        assertEquals(new String[]{"Hello","world","asd"}, collector.readFileNew().toArray());
     }
 }

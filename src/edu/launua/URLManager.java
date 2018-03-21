@@ -25,7 +25,7 @@ public class URLManager {
         createUrl(spec);
     }
 
-    public String getPageContent(){
+    public String getPageContent() {
         String res = "";
         try(InputStream inputStream = url.openStream()) {
             byte[] buffer = new byte[inputStream.available()];
@@ -43,8 +43,9 @@ public class URLManager {
         Pattern pattern = Pattern.compile("<[\\w]+");
         Matcher matcher = pattern.matcher(res);
         ArrayList<Object> tags = new ArrayList<>();
-        while(matcher.find())
+        while(matcher.find()) {
             tags.add(res.substring(matcher.start(), matcher.end()) + ">");
+        }
         return tags.toArray();
     }
 

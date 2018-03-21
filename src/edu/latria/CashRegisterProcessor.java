@@ -44,5 +44,13 @@ public class CashRegisterProcessor {
         return prices.get(name);
     }
 
+    public String getCheck(){
+        String res = "";
+        for (String key:
+             goods.keySet()) {
+            res += key + " " + goods.get(key) + "\n";
+        }
+        return res;
+    }
 
 }
