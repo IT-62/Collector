@@ -38,24 +38,17 @@ public class URLManager {
         return  res;
     }
 
-    public Object[] getPageTags() {
+    public String[] getPageTags(Collection<String> collection) {
         String res = getPageContent();
         Pattern pattern = Pattern.compile("<[\\w]+");
         Matcher matcher = pattern.matcher(res);
-        ArrayList<Object> tags = new ArrayList<>();
         while(matcher.find())
-            tags.add(res.substring(matcher.start(), matcher.end()) + ">");
-        return tags.toArray();
+            collection.add(res.substring(matcher.start(), matcher.end()) + ">");
+        return collection.toArray(new String[collection.size()]);
     }
 
-    public Object[] getPageTagsSortedSet() {
-        String res = getPageContent();
-        Pattern pattern = Pattern.compile("<[\\w]+");
-        Matcher matcher = pattern.matcher(res);
-        Set<String> tags = new TreeSet<>();
-        while(matcher.find())
-            tags.add(res.substring(matcher.start(), matcher.end()) + ">");
-        return tags.toArray();
+    public String[] getPageTagsSortedSet() {
+        return getPageTags(new TreeSet<>());
     }
 
     public Object[] getPageTagsSortedByCountSetOld() {
@@ -85,7 +78,7 @@ public class URLManager {
 
     // More clean version
     public Object[] getPageTagsSortedByCountSet() {
-        Object[] tags = getPageTags();
+        Object[] tags = getPageTags(new ArrayList<String>());
         Map<Object, Integer> tagsCount= new HashMap<>();
         for (Object tag : tags) {
             if(tagsCount.containsKey(tag))

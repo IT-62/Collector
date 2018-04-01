@@ -4,16 +4,20 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 
 public class URLManagerTest {
+    String url;
     URLManager urlManager;
+
     @Before
     public void testSetUp() throws Exception {
-        urlManager = new URLManager("file:////C://Users//San//IdeaProjects//Collector//index.html");
+        url = "file:////C://Users//San//IdeaProjects//Collector//index.html";
+        urlManager = new URLManager(url);
     }
 
     @After
@@ -22,10 +26,12 @@ public class URLManagerTest {
 
     @Test
     public void testGetUrl() {
+        assertEquals(url, urlManager.getUrl());
     }
 
     @Test
     public void testSetUrl() {
+        urlManager.setUrl("something wrong");
     }
 
     @Test
