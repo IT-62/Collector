@@ -25,7 +25,7 @@ public class URLManager {
         createUrl(spec);
     }
 
-    public String getPageContent(){
+    public String getPageContent() {
         String res = "";
         try(InputStream inputStream = url.openStream()) {
             byte[] buffer = new byte[inputStream.available()];
@@ -63,8 +63,8 @@ public class URLManager {
                         tagsCount.get(res.substring(matcher.start(), matcher.end()) + ">") + 1);
             else
                 tagsCount.put(res.substring(matcher.start(), matcher.end()) + ">", 1);
-            res = matcher.replaceFirst("");
-            matcher = pattern.matcher(res);
+//            res = matcher.replaceFirst("");
+//            matcher = pattern.matcher(res);
         }
         List list = new ArrayList(tagsCount.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
@@ -89,7 +89,7 @@ public class URLManager {
         List<Map.Entry<Object, Integer>> list = new ArrayList<>(tagsCount.entrySet());
         // list.sort((a, b) -> a.getValue() - b.getValue());
         list.sort(Comparator.comparing(Map.Entry<Object, Integer>::getValue));
-        return list.toArray();
+        return list.toArray(new String[0]);
     }
 
     private void createUrl(String spec) {
